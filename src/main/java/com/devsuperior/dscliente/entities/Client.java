@@ -8,6 +8,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_client")
 public class Client implements Serializable {
+    //-----------------------------------------------
+    // Atributos e id do serializable
+    //------------------------------------------------
     private static final long serialVersionUID = 1L;
 
     @Id

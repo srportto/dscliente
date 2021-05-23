@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.time.Instant;
 
 public class ClientDTO implements Serializable {
+    //-----------------------------------------------
+    // Atributos e id do serializable
+    //------------------------------------------------
     private static final long serialVersionUID = 1L;
 
     private Long id;
