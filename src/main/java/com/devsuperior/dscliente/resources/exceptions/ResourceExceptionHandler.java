@@ -1,5 +1,6 @@
 package com.devsuperior.dscliente.resources.exceptions;
 
+import com.devsuperior.dscliente.services.exceptions.DatabaseException;
 import com.devsuperior.dscliente.services.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +24,19 @@ public class ResourceExceptionHandler {
         layoutError.setPath(req.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(layoutError);
+    }
+
+    @ExceptionHandler(DatabaseException.class) //intercepta o lancamento de execoes desse tipo
+    public ResponseEntity<LayoutErrorsProject> database(DatabaseException error, HttpServletRequest req){
+
+        LayoutErrorsProject layoutError = new LayoutErrorsProject();
+
+        layoutError.setTimestamp(Instant.now());
+        layoutError.setStatus(HttpStatus.BAD_REQUEST.value());
+        layoutError.setError("database exception");
+        layoutError.setMessage(error.getMessage());
+        layoutError.setPath(req.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(layoutError);
     }
 }
